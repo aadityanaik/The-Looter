@@ -5,17 +5,14 @@
 
 class Items
 {
-    char it_name[100];
+    char it_name[101];
     int it_att, it_def;
 
 public:
 
-    Items(char *s = "\0", int a = 0, int d = 0)
+    Items(char *s = "0", int a = 0, int d = 0)                                 //Initializes items to have name "0", 0 att, 0 def by default;
     {
-        for(int i = 0; i < strlen(s); i++){
-            it_name[i] = (*(s + i));
-        }
-
+        strcpy(it_name, s);
         it_att = a;
         it_def = d;
     }
