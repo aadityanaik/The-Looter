@@ -9,6 +9,7 @@ using namespace std;
 
 int action(Player X)                                                //Function that returns an integer to perform the corresponding action
 {
+    int i;
     int line = 1;
     char input[101];
     do{
@@ -18,13 +19,14 @@ int action(Player X)                                                //Function t
     }while(strlen(input) >= 101);
 
     char verb[8];                                                   //Maximum length of verb in dictionary is 8 chars
-    for(int i = 0; input[i] != ' '; i++){
+    for(i = 0; input[i] != ' '; i++){
         verb[i] = input[i];
     }
-    verb[7] = '\0';
+    verb[i] = '\0';
 
     if(!(strcmp(verb, "inv"))){                                     //inv is verb to display inventory
         X.show_inv();
+        return 1000;
     }
 
     ifstream iFile;
