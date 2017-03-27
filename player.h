@@ -1,9 +1,10 @@
 #include "entity.h"
+#include "items.h"
 
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-class Player : public Entity
+class Player : public Entity, public Items
 {
 public:
 
@@ -15,11 +16,18 @@ public:
         name = new char [101];
     }
 
+
+    struct Inventory{
+        Items i[10];
+    }inv_player;
+
     void set_name();
 
     bool chk_name();
 
     void show_name();
+
+    void show_inv();
 };
 
 #endif // _PLAYER_H
