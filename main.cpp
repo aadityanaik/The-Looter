@@ -1,5 +1,4 @@
 #include <iostream>
-#include <windows.h>
 #include <fstream>
 #include "player.h"
 #include "items.h"
@@ -7,17 +6,12 @@
 
 using namespace std;
 
-struct Inventory
-{
-	Items i[10];
-}inv_player;
-
-void help(int x)
+void help(int x)                                                        //Help
 {
     switch(x)
     {
     case 1:                                                             //General syntax
-        cout << "_________________ is an interactive text based adventure game." << endl;
+        cout << "Railroad Caper is an interactive text based adventure game." << endl;
         cout << "In this game, the user is expected to enter two words in the form of <verb> <noun>" << endl;
         cout << "For example, if you want to brush your teeth, input \"Brush teeth\"." << endl << endl;
         cout << "Grammar is not an important aspect in this game, so do not enter unnecessary prepositions." << endl;
@@ -29,7 +23,7 @@ void help(int x)
     case 2:                                                             //list of accepted words
         {
             ifstream iFile;
-            iFile.open("data\\dictionary\\verbs.dat");
+            iFile.open("data\\dictionary\\verbs.dat");                  //file with acceptable verbs
             cout<< "Here is a list of accepted verbs-" << endl;
             while(iFile){
                 string word;
@@ -50,12 +44,12 @@ void help(int x)
 int main()
 {
     Player X;                                                           //object of the player
-    cout << "Welcome to _________________, a text-based adventure game." << endl << endl << endl;
+    cout << "Welcome to Railroad Caper, a text-based adventure game." << endl << endl << endl;
     cout << "Do you wish to-" << endl;
     cout << "1) Start a new game?" << endl;
     cout << "2) Load an existing game?" << endl;
     cout << "3) Get help?" << endl;
-    cout << "\t\t\t\t\t\t\t\tInteger input expected" << endl;
+    cout << "\t\t\t\t\t\tInteger input expected" << endl;
 
     int choice;
 
@@ -66,12 +60,10 @@ int main()
     case 1:                                                             //Start a new game
         {
             char c;
-            system("CLS");
             cout << "What will be your adventurer's name?" << endl;
             cin.ignore();
             X.set_name();                                               //Get the player's name
             do{
-                system("CLS");
                 cout << "Alright, ";
                 X.show_name();
                 cout << ". Get ready for your Adventure!" << endl << endl << endl;
@@ -82,13 +74,12 @@ int main()
         }
         break;
     case 2:                                                             //loads an existing game
-        system("CLS");
         cout << "Which file do you want to load?" << endl;
         break;
     case 3:                                                             //help
-        system("CLS");
         {
             Start:
+            char x;
             cout << "What do you want help with?" << endl;
             cout << "1) Syntax of inputs ingame?" << endl;
             cout << "2) Words preferably used?" << endl;
@@ -96,22 +87,22 @@ int main()
             cin >> help_no;
             if(help_no != 1 && help_no != 2)
             {
-                cout << "I do not understand what you are saying." << endl;
-                Sleep(2500);
+                cout << "I do not understand what you are saying. Press Enter..." << endl;
+                cin.get(x);
                 goto Start;
             }
-            system("CLS");
             help(help_no);
-            char x;
-            cin >> x;
+            cin.get(x);
         }
         break;
     }
 
 Newgame:
-    system("CLS");
+    X.inv_player.i[0] = Items("matchbox", 0, 0);                        //Player starts with a matchbox
+
     ifstream iFile;
-    iFile.open("data\\rooms\\start.dat");
+    ofstream oFile;
+    iFile.open("data\\rooms\\start.dat");                               //Starting room data
     while(iFile)
     {
         string disp;
@@ -120,6 +111,6 @@ Newgame:
     }
     iFile.close();
 
-    int x;
-    x = action();
+    int actnum;
+    actnum = action(X);
 }
