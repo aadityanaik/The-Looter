@@ -5,20 +5,22 @@
 
 class Items
 {
-    char name[100];
-    int att, def, weight;
+    char it_name[100];
+    int it_att, it_def;
 
 public:
 
     Items(char *s = "\0", int a = 0, int d = 0)
     {
         for(int i = 0; i < strlen(s); i++){
-            name[i] = (*(s + i));
+            it_name[i] = (*(s + i));
         }
 
-        att = a;
-        def = d;
+        it_att = a;
+        it_def = d;
     }
+
+    void disp();
 };
 
 #endif // _ITEMS_H
