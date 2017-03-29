@@ -8,4 +8,4 @@ When downloading the source files to a computer, be sure to download all of them
 
 
 Also Note- 
-Linux systems don't work with this code, simply because of a goof up between the "\" in windows and the "/" in linux while making directories.
+Linux systems don't work with this code, simply because of a goof up between the "\\" in windows and the "/" in linux while making directories.
