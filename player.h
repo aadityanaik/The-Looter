@@ -1,25 +1,22 @@
-#include "entity.h"
 #include "items.h"
 
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-class Player : public Entity, public Items
+class Player
 {
+  int health, att, def;
+  std::string name;
 public:
 
-    Player():Entity()
+    Player()
     {
         health = 100;
         att = 2;
         def = 5;
-        name = new char [101];
     }
 
-
-    struct Inventory{
-        Items i[10];
-    }inv_player;
+    Items inv[10];
 
     void set_name();
 
