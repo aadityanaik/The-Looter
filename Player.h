@@ -6,14 +6,17 @@
 
 #include <iostream>
 
-class Player
+#include "Entity.h"
+
+class Player: public Entity
 {
   std::string name;
-  //no need of attack or defense because of a lack of enemies in this game
 
  public:
-  Player(std::string s = "0"){
+  Player(std::string s = "0"):Entity(){
     name = s;
+    att = 5;
+    def = 7;
   }
 
   void disp_name();

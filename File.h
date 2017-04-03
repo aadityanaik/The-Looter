@@ -1,7 +1,5 @@
 //This class takes care of the file handling aspect of this program.
 
-
-
 #ifndef _FILE_H
 #define _FILE_H
 

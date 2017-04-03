@@ -70,7 +70,6 @@ int main()
  NEWGAME:
   std::string command;
   getline(std::cin, command);
-  std::cout << wordcount(command) << std::endl;
 
   return 0;
 }

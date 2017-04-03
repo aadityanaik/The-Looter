@@ -12,20 +12,27 @@ void Player::disp_name()
 
 void Player::action(std::string input)
 {
-  std::string verb;
+  std::string verb, preposition, noun;
   std::istringstream stream(input);
 
   switch(wordcount(input)){
   case 1:
-    //algo
+    //accepted word(s) is/are- Look, wait, smell, listen, inv, f, b, l, r
+    if(input == "look"){
+      //function for look
+    }
+
+    else if(input == "wait"){
+      //function for wait
+    }
     break;
 
   case 2:
-    //algo
+    //accepted words are- open, remove, drop, inspect, feel, consume, use
     break;
 
   case 3:
-    //algo
+    //accepted words are- inspect, wait
     break;
 
   default:
