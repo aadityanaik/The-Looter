@@ -1,91 +1,75 @@
 #include <iostream>
-#include <fstream>
-#include "player.h"
-#include "items.h"
-#include "functions.h"
 
-using namespace std;
+//custom headers
+#include "Player.h"
+#include "File.h"
+#include "Functions.h"
 
 int main()
 {
-    Player X;                                                           //object of the player
+  //declarations
+  char choice;
+  Player X;
+  File menu("data/Menu.dat");
+  File room;
+  
+  //menu screen shown to player
  MENU:
-    cout << "Welcome to Railroad Caper, a text-based adventure game." << endl << endl << endl;
-    cout << "Do you wish to-" << endl;
-    cout << "1) Start a new game?" << endl;
-    cout << "2) Load an existing game?" << endl;
-    cout << "3) Get help?" << endl;
-    cout << "\t\t\t\t\t\tInteger input expected" << endl;
+  menu.disp();
 
-    int choice;
+  do{
+    std::cin >> choice;
 
-    cin >> choice;
+    //Actions dependent on the player's choice
+    switch(choice){
+    case '1':
+      //This means that the player wants to start a new game
+      //Following functions will take in the player's name
+      {
+	File Index("data/Index.ind");
+	std::string input;
+	char c;
+	std::cout << "What is your name?" << std::endl;
+	std::cin.ignore();	  
+	getline(std::cin, input);
+	
+	while(Index.chk_line(input)){
+	  std::cout << "Your name already exists. Pick another one." << std::endl;
+	  getline(std::cin, input);
+	}
 
-    switch(choice)
-    {
-    case 1:                                                             //Start a new game
-        {
-            char c;
-            cout << "What will be your adventurer's name?" << endl;
-	    cin.ignore();
-            X.set_name();                                               //Get the player's name
-            do{
-                cout << "Alright, ";
-                X.show_name();
-                cout << ". Get ready for your Adventure!" << endl << endl << endl;
-                cout << "\t\t\t\t\tPress Enter" << endl;
-                cin.get(c);
-            }while(c != '\n');
-            goto Newgame;                                               //goes to the code where functions of the new game are written
-        }
-        break;
-    case 2:                                                             //loads an existing game
-        cout << "Which file do you want to load?" << endl;
-        break;
-    case 3:                                                             //help
-        {
-            Start:
-            char x;
-            cout << "What do you want help with?" << endl;
-            cout << "1) Syntax of inputs ingame?" << endl;
-            cout << "2) Words preferably used?" << endl;
-            int help_no, count_fail = 0;
-            cin >> help_no;
-            if(help_no != 1 && help_no != 2)
-            {
-                cout << "I do not understand what you are saying. Press Enter..." << endl;
-                cin.get(x);
-                goto Start;
-            }
-            help(help_no);
-	    cin.ignore();
-            cin.get(x);
-	    goto MENU;
-        }
-        break;
+	Index.append(input);
+	
+	X = Player(input);
+	std::cout << "Alright, ";
+	X.disp_name();
+	std::cout << ", get ready!" << std::endl << std::endl << std::endl;
+	std::cout << "\t\t\tPress Enter" << std::endl;
+	std::cin.get();
+	goto NEWGAME;
+      }
+      break;
+
+    case '2':
+      //This will be to load a pre-existing game
+      //Will start once the basic game's algorithm is complete
+      break;
+
+    case '3':
+      //This is when the player wants an introduction as to the general syntax expected as input
+      break;
+
     default:
-      cout << "Could not recognize parameters. Try again." << endl;
-      goto MENU;
+      //Player should be told to re enter the input
+      break;
     }
+  }while(1);
 
-Newgame:
-    X.inv[0] = Items("matchbox", 0, 0);                        //Player starts with a matchbox
 
-    ifstream iFile;
-    ofstream oFile;
-    iFile.open("data/rooms/start.dat");                               //Starting room data
-    while(!iFile.eof())
-    {
-        string disp;
-        getline(iFile, disp);
-        cout << disp << endl;
-    }
-    iFile.close();
+  //Here begins the algorithm of the game
+ NEWGAME:
+  std::string command;
+  getline(std::cin, command);
 
-    int actnum;
-    actnum = action(X);
-
-    //cout << "OYYYY" << endl;
-
-    return 0;
+  return 0;
 }

@@ -1,0 +1,9 @@
+Welcome to Railroad Caper, a text-based adventure!
+
+What do you want to do?
+1) Start a new game
+2) Load a previously existing game
+3) Get help
+
+
+					Integer input expected
