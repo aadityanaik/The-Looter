@@ -1,8 +1,11 @@
 #include <iostream>
+#include <stdlib.h>
+#include <cstdio>
 
 //custom headers
 #include "Player.h"
 #include "File.h"
+#include "Room.h"
 #include "Functions.h"
 
 int main()
@@ -12,7 +15,7 @@ int main()
   Player X;
   File menu("data/Menu.dat");
   File room;
-  
+
   //menu screen shown to player
  MENU:
   menu.disp();
@@ -30,16 +33,16 @@ int main()
 	std::string input;
 	char c;
 	std::cout << "What is your name?" << std::endl;
-	std::cin.ignore();	  
+	std::cin.ignore();
 	getline(std::cin, input);
-	
+
 	while(Index.chk_line(input)){
 	  std::cout << "Your name already exists. Pick another one." << std::endl;
 	  getline(std::cin, input);
 	}
 
 	Index.append(input);
-	
+
 	X = Player(input);
 	std::cout << "Alright, ";
 	X.disp_name();
@@ -65,13 +68,23 @@ int main()
     }
   }while(1);
 
-
+ NEWGAME:
   //Here begins the algorithm of the game
 
-  Room Start("Start", 0);
-  Room 
-  
- NEWGAME:
+  Room Start("start", 0);
+  Room R[12];
+  for(int i = 0; i < 12; i++){
+    std::string name = "room";
+    name = name + std::to_string(i + 1);
+    R[i] = Room(name, i);
+  }
+  X.occupied = R[0];
+
+  Start.display();
+  std::cout << "\t\t\tPress Enter" << std::endl;
+  std::cin.get();
+
+  X.occupied.display();
   std::string command;
   getline(std::cin, command);
 

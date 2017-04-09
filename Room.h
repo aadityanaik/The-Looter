@@ -9,7 +9,9 @@ class Room
  public:
   Room(std::string x = "", int a = -1){
     std::string path = "data/rooms/";
+    std::string ext = ".dat";
     name = path + x;
+    name = name + ext;
     code = a;
     room_f = -1;
     room_l = -1;
