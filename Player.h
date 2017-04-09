@@ -7,20 +7,25 @@
 #include <iostream>
 
 #include "Entity.h"
+#include "Room.h"
 
 class Player: public Entity
 {
   std::string name;
 
  public:
-  Player(std::string s = "0"):Entity(){
+  Player(std::string s = ""):Entity(){
     name = s;
     att = 5;
     def = 7;
   }
 
+  Room occupied;
+  
   void disp_name();
-  void action(std::string input);
+  void action(std::string, Room*);
+
+  friend class Room;
 };
 
 #endif
