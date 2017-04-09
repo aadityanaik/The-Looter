@@ -67,6 +67,10 @@ int main()
 
 
   //Here begins the algorithm of the game
+
+  Room Start("Start", 0);
+  Room 
+  
  NEWGAME:
   std::string command;
   getline(std::cin, command);
