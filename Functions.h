@@ -5,5 +5,11 @@
 #include "Room.h"
 
 int wordcount(std::string);
+//Above is a function to count words
 
+void make_map(Room*);
+//Above is a function to generate the mmap before the game begins
+//The map of each game is fixed (for now)
+
+int console_width();
 #endif

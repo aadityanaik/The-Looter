@@ -8,6 +8,8 @@
 #include "Room.h"
 #include "Functions.h"
 
+
+
 int main()
 {
   //declarations
@@ -72,21 +74,32 @@ int main()
   //Here begins the algorithm of the game
 
   Room Start("start", 0);
-  Room R[12];
-  for(int i = 0; i < 12; i++){
+  Room R[8];
+  for(int i = 0; i < 8; i++){
     std::string name = "room";
     name = name + std::to_string(i + 1);
-    R[i] = Room(name, i);
+    R[i] = Room(name, i + 1);
   }
+
+  make_map(R);
+
   X.occupied = R[0];
 
   Start.display();
   std::cout << "\t\t\tPress Enter" << std::endl;
   std::cin.get();
 
-  X.occupied.display();
-  std::string command;
-  getline(std::cin, command);
+  do{
+    X.occupied.display();
+    std::string command;
+    getline(std::cin, command);
+    X.action(command, R);
+    std::cout << std:: endl;
+    for(int k = 0; k < console_width(); k++){
+      std::cout << "-";
+    }
 
+    std::cout << std::endl << std::endl;
+  }while(1);
   return 0;
 }

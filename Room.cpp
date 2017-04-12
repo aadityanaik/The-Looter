@@ -29,7 +29,7 @@ void Room::set_para(int front, int left, int right, int back)
   room_b = back;
 }
 
-int Room::return_code(char x = 'i')
+int Room::return_code(char x = 'c')
 {
   switch(x){
   case 'f':
