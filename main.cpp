@@ -73,6 +73,7 @@ int main()
  NEWGAME:
   //Here begins the algorithm of the game
 
+//Outside world
   Room Start("start", 0);
   Room R[8];
   for(int i = 0; i < 8; i++){
@@ -81,20 +82,29 @@ int main()
     R[i] = Room(name, i + 1);
   }
 
+  //Generates the map
   make_map(R);
 
+  //Player first starts at R[0] inside the cave
   X.occupied = R[0];
 
   Start.display();
   std::cout << "\t\t\tPress Enter" << std::endl;
   std::cin.get();
 
+  /*
+  General Algorithm for the game:-
+  1. Show the player the room he/she is in (except in battles)
+  2. get the player's command
+  3. Perform an action based on the entered command, which will also show the result
+  4. Mark a separation point for the player to know that it is the beginning of a new loop
+  */
   do{
     X.occupied.display();
     std::string command;
     getline(std::cin, command);
     X.action(command, R);
-    std::cout << std:: endl;
+    std::cout << std:: endl << std::endl;
     for(int k = 0; k < console_width(); k++){
       std::cout << "-";
     }

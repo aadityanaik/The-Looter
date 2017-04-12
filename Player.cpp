@@ -31,6 +31,7 @@ void Player::action(std::string input, Room *r)
 
     else if(input == "inv"){
       //shows inventory
+      inv.disp_inv();
     }
 
     else if(input == "f"){
@@ -92,7 +93,7 @@ void Player::action(std::string input, Room *r)
 	}
       }
     }
-    
+
     break;
 
   case 2:
@@ -107,5 +108,10 @@ void Player::action(std::string input, Room *r)
     std::cout << "Parameters not recognized" << std::endl;
     break;
   }
-  
+
+}
+
+void Player::show_inv()
+{
+  inv.disp_inv();
 }
