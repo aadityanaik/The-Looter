@@ -18,13 +18,9 @@ void Player::action(std::string input, Room *r)
 
   switch(wordcount(input)){
   case 1:
-    //accepted word(s) is/are- Look, wait, smell, listen, inv, f, b, l, r
-    if(input == "look"){
-      //function for look
-      occupied.display();
-    }
+    //accepted word(s) is/are- wait, smell, listen, inv, f, b, l, r
 
-    else if(input == "wait"){
+    if(input == "wait"){
       //function for wait
       std::cout << "Time passes" << std::endl;
     }
@@ -97,7 +93,36 @@ void Player::action(std::string input, Room *r)
     break;
 
   case 2:
-    //accepted words are- open, remove, drop, inspect, feel, consume, use
+    //accepted words are- open, remove, drop, inspect, consume, use, take
+
+    stream >> verb >> noun;
+    if(input == "open"){
+      //open 'noun'
+    }
+
+    else if(input == "remove"){
+      //remove 'noun'
+    }
+
+    else if(input == "drop"){
+      //drop 'noun'
+    }
+
+    else if(input == "inspect"){
+      //inspect 'noun'
+    }
+
+    else if(input == "consume"){
+      //consume 'noun'
+    }
+
+    else if(input == "use"){
+      //use 'noun'
+    }
+
+    else if(input == "take"){
+      //take 'noun'
+    }
     break;
 
   case 3:

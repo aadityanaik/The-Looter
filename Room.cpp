@@ -49,3 +49,8 @@ int Room::return_code(char x = 'c')
 
   }
 }
+
+void Room::add_item(std::string x, float w, int a, int d)
+{
+  items_list.push_back(Items(x, w, a, d));
+}
