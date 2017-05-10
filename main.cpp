@@ -9,17 +9,27 @@
 #include "Functions.h"
 
 
+//so that the '\' and '/' demarkation for folders will not conflict between windows and unix based systems
+
+#ifdef _WIN32
+  File menu("data\\Menu.dat");
+  File Index("data\\Index.ind");
+
+#elif __unix__
+  File menu("data/Menu.dat");
+  File Index("data/Index.ind");
+
+#endif
 
 int main()
 {
   //declarations
   char choice;
   Player X;
-  File menu("data/Menu.dat");
   File room;
 
   //menu screen shown to player
- MENU:
+ //MENU:
   menu.disp();
 
   do{
@@ -31,27 +41,26 @@ int main()
       //This means that the player wants to start a new game
       //Following functions will take in the player's name
       {
-	File Index("data/Index.ind");
-	std::string input;
-	char c;
-	std::cout << "What is your name?" << std::endl;
-	std::cin.ignore();
-	getline(std::cin, input);
+	      std::string input;
+	      //char c;
+	      std::cout << "What is your name?" << std::endl;
+	      std::cin.ignore();
+	      getline(std::cin, input);
 
-	while(Index.chk_line(input)){
-	  std::cout << "Your name already exists. Pick another one." << std::endl;
-	  getline(std::cin, input);
-	}
+	      while(Index.chk_line(input)){
+	        std::cout << "Your name already exists. Pick another one." << std::endl;
+	        getline(std::cin, input);
+	      }
 
-	Index.append(input);
+	      Index.append(input);
 
-	X = Player(input);
-	std::cout << "Alright, ";
-	X.disp_name();
-	std::cout << ", get ready!" << std::endl << std::endl << std::endl;
-	std::cout << "\t\t\tPress Enter" << std::endl;
-	std::cin.get();
-	goto NEWGAME;
+	      X = Player(input);
+	      std::cout << "Alright, ";
+	      X.disp_name();
+	      std::cout << ", get ready!" << std::endl << std::endl << std::endl;
+	      std::cout << "\t\t\tPress Enter" << std::endl;
+	      std::cin.get();
+	      goto NEWGAME;
       }
       break;
 

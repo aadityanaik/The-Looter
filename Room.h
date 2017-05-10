@@ -9,7 +9,7 @@ class Room
 {
   std::string name;
   int code, room_f, room_l, room_r, room_b;
-  std::vector<Items> items_list;
+  //std::vector<Items> items_list;
 
  public:
   Room(std::string x = "", int a = -1){
@@ -39,7 +39,7 @@ class Room
   bool chkroom(int);
   void set_para(int, int, int, int);
   int return_code(char x);
-  void add_item(std::string x, float w, int a, int d);
+  //void add_item(std::string x, float w, int a, int d);
 };
 
 #endif

@@ -8,7 +8,7 @@ class Items
   std::string name;
   float weight;
   int attack, defense;
-  bool present;
+  bool present, takeable;
 
  public:
   Items(std::string x = "", float w = 0, int a = 0, int d = 0){
