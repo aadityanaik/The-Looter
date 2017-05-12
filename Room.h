@@ -13,8 +13,15 @@ class Room
 
  public:
   Room(std::string x = "", int a = -1){
-    std::string path = "data/rooms/";
-    std::string ext = ".dat";
+    std::string ext = ".dat";     
+    #ifdef _WIN32
+      std::string path = "data\\rooms";
+
+    #elif __unix__
+      std::string path = "data/rooms/";
+
+    #endif
+
     name = path + x;
     name = name + ext;
     code = a;
