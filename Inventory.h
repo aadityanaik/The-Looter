@@ -20,6 +20,6 @@ public:
   //To display the inventory
   void disp_inv();
   //To add an item to the inventory
-  //void add_it();
+  void add_it(Items);
 };
 #endif

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
-#include <cstdio>
+
 
 //custom headers
 #include "Player.h"
@@ -84,7 +84,7 @@ int main()
 
 //Outside world
   Room Start("start", 0);
-  Room R[8];
+  Room *R = new Room[8];
   for(int i = 0; i < 8; i++){
     std::string name = "room";
     name = name + std::to_string(i + 1);

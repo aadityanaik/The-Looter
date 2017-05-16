@@ -9,13 +9,13 @@ class Room
 {
   std::string name;
   int code, room_f, room_l, room_r, room_b;
-  //std::vector<Items> items_list;
+  std::vector<Items> items_list;
 
  public:
   Room(std::string x = "", int a = -1){
-    std::string ext = ".dat";     
+    std::string ext = ".dat";
     #ifdef _WIN32
-      std::string path = "data\\rooms";
+      std::string path = "data\\rooms\\";
 
     #elif __unix__
       std::string path = "data/rooms/";
@@ -30,7 +30,8 @@ class Room
     room_r = -1;
     room_b = -1;
     File R(name);
-    R.append("");
+
+    //items_list.push_back(Items());
   }
 
   Room(const Room &x){
@@ -46,7 +47,10 @@ class Room
   bool chkroom(int);
   void set_para(int, int, int, int);
   int return_code(char x);
-  //void add_item(std::string x, float w, int a, int d);
+  void set_items(int);
+
+  Items show_item(std::string);
+  void show_it_list();
 };
 
 #endif

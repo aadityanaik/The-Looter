@@ -11,12 +11,13 @@ class Items
   bool present, takeable;
 
  public:
-  Items(std::string x = "", float w = 0, int a = 0, int d = 0){
+  Items(std::string x = "", int take = 0, float w = 0, int a = 0, int d = 0){
     name = x;
     weight = w;
     attack = a;
     defense = d;
     present = true;
+    takeable = take;
   }
 
   //display Item Properties
@@ -25,6 +26,16 @@ class Items
 
   //toggle presence
   void togglepresence();
+
+  std::string it_name();
+
+  bool can_take();
+
+  int returnatt();
+  int returndef();
+  int returnwgt();
+
+  bool operator == (Items);
 };
 
 #endif

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <algorithm>
 
 //custom headers
 #include "Room.h"
@@ -50,7 +52,50 @@ int Room::return_code(char x = 'c')
   }
 }
 
-/*void Room::add_item(std::string x, float w, int a, int d)
+void Room::set_items(int i)
 {
-  items_list.push_back(Items(x, w, a, d));
-}*/
+  #ifdef _WIN32
+    std::string path = "data\\rooms\\items\\";
+
+  #elif __unix__
+    std::string path = "data/rooms/items/";
+
+  #endif // _WIN32
+
+  std::string fname = path + "room" + std::to_string(i) + ".csv";
+
+  std::ifstream it_list;
+  it_list.open(fname);
+
+  std::string name, takeability, attack, defense, weight;
+
+  while(!it_list.eof()){
+    getline(it_list, name, ',');
+    getline(it_list, takeability, ',');
+    getline(it_list, attack, ',');
+    getline(it_list, defense, ',');
+    getline(it_list, weight);
+    items_list.push_back(Items(name, std::stoi(takeability), std::stoi(weight), std::stoi(attack), std::stoi(defense)));
+  }
+
+  items_list.pop_back();
+}
+
+Items Room::show_item(std::string name)
+{
+  for(auto iter = items_list.begin(); iter < items_list.end(); iter++){
+    if((iter->it_name()) == name){
+      return (*iter);
+    }
+  }
+
+  std::cout << "No such item" << std::endl;
+  return Items();
+}
+
+void Room::show_it_list()
+{
+  for(auto iter = items_list.begin(); iter < items_list.end(); iter++){
+    iter->it_display();
+  }
+}
