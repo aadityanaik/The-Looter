@@ -6,13 +6,15 @@
 #include "Functions.h"
 #include "Room.h"
 #include "Items.h"
+#include "Mobs.h"
+#include "combat.h"
 
 void Player::disp_name()
 {
   std::cout << name;
 }
 
-void Player::action(std::string input, Room *r)
+void Player::action(std::string input, Room *r, Mobs *m, int range)
 {
   std::string verb, preposition, noun;
   std::istringstream stream(input);
@@ -43,6 +45,12 @@ void Player::action(std::string input, Room *r)
             occupied = (*(r + i));
           }
         }
+
+        for(int i = 0; i < range; i++){
+          if(occupied == (m + i)->occupied){
+            engage(m, this);
+          }
+        }
       }
     }
 
@@ -58,6 +66,12 @@ void Player::action(std::string input, Room *r)
             occupied = (*(r + i));
           }
         }
+
+        for(int i = 0; i < range; i++){
+          if(occupied == (m + i)->occupied){
+            engage(m, this);
+          }
+        }
       }
     }
 
@@ -71,6 +85,12 @@ void Player::action(std::string input, Room *r)
         for(int i = 0; i < 8; i++){
           if(code == ((r + i) -> return_code('i'))){
             occupied = (*(r + i));
+          }
+        }
+
+        for(int i = 0; i < range; i++){
+          if(occupied == (m + i)->occupied){
+            engage(m, this);
           }
         }
       }
@@ -91,6 +111,12 @@ void Player::action(std::string input, Room *r)
             occupied = (*(r + i));
           }
         }
+
+        for(int i = 0; i < range; i++){
+          if(occupied == (m + i)->occupied){
+            engage(m, this);
+          }
+        }
       }
     }
 
@@ -105,24 +131,29 @@ void Player::action(std::string input, Room *r)
     //accepted words are- open, remove, drop, inspect, consume, use, take
 
     stream >> verb >> noun;
-    if(verb == "open"){
+    /*if(verb == "open"){
       //open 'noun'
     }
 
     else if(verb == "remove"){
       //remove 'noun'
-    }
+    }*/
 
-    else if(verb == "drop"){
+    if(verb == "drop"){
       //drop 'noun'
+      Items X = inv.rm_it(noun);
+      if(X == Items()){
+        std::cout << "You don't possess that" << std::endl;
+      }
+
+      else{
+        std::cout <<"dropped" << std::endl;
+       occupied.items_list.push_back(X);
+      }
     }
 
     else if(verb == "inspect"){
       //inspect 'noun'
-    }
-
-    else if(verb == "consume"){
-      //consume 'noun'
     }
 
     else if(verb == "use"){
@@ -139,8 +170,15 @@ void Player::action(std::string input, Room *r)
       }
 
       else if(X.can_take()){
+        auto iter = occupied.items_list.begin();
+        for(iter = occupied.items_list.begin(); iter < occupied.items_list.end(); iter++){
+          if((*iter) == X){
+            break;
+          }
+        }
         std::cout << "taken" << std::endl;
         inv.add_it(X);
+        occupied.items_list.erase(iter);
         att += X.returnatt();
         weight += X.returnwgt();
         def += X.returndef();
@@ -166,4 +204,11 @@ void Player::action(std::string input, Room *r)
 void Player::show_inv()
 {
   inv.disp_inv();
+}
+
+void Player::defend(Mobs *enemy)
+{
+  int health_loss = enemy->att - def;
+
+  health -= health_loss;
 }

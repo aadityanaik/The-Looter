@@ -7,6 +7,7 @@
 #include "File.h"
 #include "Room.h"
 #include "Functions.h"
+#include "Mobs.h"
 
 
 //so that the '\' and '/' demarkation for folders will not conflict between windows and unix based systems
@@ -93,6 +94,12 @@ int main()
 
   //Generates the map
   make_map(R);
+  Mobs *enemy = new Mobs[1];
+  enemy[0] = Mobs("spider", 25, 10);
+
+  for(int i = 0; i < 1; i++){
+    enemy[i].set_occupied(2, R);
+  }
 
   //Player first starts at R[0] inside the cave
   X.occupied = R[0];
@@ -112,13 +119,19 @@ int main()
     X.occupied.display();
     std::string command;
     getline(std::cin, command);
-    X.action(command, R);
+    X.action(command, R, enemy, 1);
     std::cout << std:: endl << std::endl;
     for(int k = 0; k < console_width(); k++){
       std::cout << "-";
     }
 
-    std::cout << std::endl << std::endl;
-  }while(1);
+    std::cout << std::endl << "\t\t\t\tPress Enter" << std::endl;
+    std::cin.get();
+
+    clrscreen();
+  }while(X.isalive());
+
+  std::cout << "You died" << std::endl;
+
   return 0;
 }

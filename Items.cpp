@@ -49,5 +49,7 @@ bool Items::operator == (Items X)
     }
   }
 
-  else return false;
+  else{
+    return false;
+  }
 }

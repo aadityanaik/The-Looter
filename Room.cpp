@@ -99,3 +99,19 @@ void Room::show_it_list()
     iter->it_display();
   }
 }
+
+int Room::show_code()
+{
+  return code;
+}
+
+bool Room::operator ==(Room X)
+{
+  if(code == X.code){
+    return true;
+  }
+
+  else
+    return false;
+}
+

@@ -12,14 +12,16 @@ class Inventory
 public:
   Inventory(){
     //Player starts with a torch, a sword and a shield
-    inventory.push_back(Items("Torch", 0));
-    inventory.push_back(Items("Sword", 3, 10, 4));
-    inventory.push_back(Items("Shield", 5, 5, 8));
+    inventory.push_back(Items("Torch"));
+    inventory.push_back(Items("Sword", 1, 3, 10, 4));
+    inventory.push_back(Items("Shield", 1, 5, 5, 8));
   }
 
   //To display the inventory
   void disp_inv();
   //To add an item to the inventory
   void add_it(Items);
+
+  Items rm_it(std::string);
 };
 #endif

@@ -73,3 +73,16 @@ int console_width()
 }
 
 #endif
+
+#ifdef _WIN32
+void clrscreen()
+{
+  system("CLS");
+}
+
+#elif __unix__
+void clrscreen()
+{
+  system("CLEAR");
+}
+#endif // _WIN32

@@ -12,4 +12,7 @@ void make_map(Room*);
 //The map of each game is fixed (for now)
 
 int console_width();
+
+//to clear the screen
+void clrscreen();
 #endif

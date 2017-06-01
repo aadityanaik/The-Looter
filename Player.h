@@ -1,14 +1,14 @@
 //Information about the player is included here
 
 
-#ifndef _PLAYER_H
-#define _PLAYER_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <iostream>
 
 #include "Entity.h"
-#include "Room.h"
 #include "Inventory.h"
+class Mobs;
 
 class Player: public Entity
 {
@@ -18,18 +18,20 @@ class Player: public Entity
  public:
   Player(std::string s = ""):Entity(){
     name = s;
-    att = 5;
+    att = 15;
     def = 7;
     weight = 0;
   }
 
-  Room occupied;
 
   void disp_name();
-  void action(std::string, Room*);
+  void action(std::string, Room*, Mobs*, int);
   void show_inv();
+  //defend against mob attacks
+  void defend(Mobs*);
 
-  friend class Room;
+  friend class Mobs;
+  bool friend engage(Mobs*, Player*);
 };
 
 #endif

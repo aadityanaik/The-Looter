@@ -9,31 +9,33 @@ class Room
 {
   std::string name;
   int code, room_f, room_l, room_r, room_b;
-  std::vector<Items> items_list;
+  int mob_present;
 
  public:
   Room(std::string x = "", int a = -1){
-    std::string ext = ".dat";
-    #ifdef _WIN32
-      std::string path = "data\\rooms\\";
+    if(x != ""){
+      std::string ext = ".dat";
+      #ifdef _WIN32
+        std::string path = "data\\rooms\\";
 
-    #elif __unix__
-      std::string path = "data/rooms/";
+      #elif __unix__
+        std::string path = "data/rooms/";
 
-    #endif
+      #endif
 
-    name = path + x;
-    name = name + ext;
+      name = path + x;
+      name = name + ext;
+      File R(name);
+    }
     code = a;
     room_f = -1;
     room_l = -1;
     room_r = -1;
     room_b = -1;
-    File R(name);
+    mob_present = -1;
 
-    //items_list.push_back(Items());
   }
-
+  std::vector<Items> items_list;
   Room(const Room &x){
     name = x.name;
     code = x.code;
@@ -47,10 +49,13 @@ class Room
   bool chkroom(int);
   void set_para(int, int, int, int);
   int return_code(char x);
+  int show_code();
   void set_items(int);
 
   Items show_item(std::string);
   void show_it_list();
+
+  bool operator ==(Room);
 };
 
 #endif
